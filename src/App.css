@@ -1,22 +1,15 @@
 #root {
-  max-width: 1280px;
+  /* Remova ou comente a linha abaixo */
+  /* max-width: 1280px; */
+
+  /* Mantenha estas, elas centralizam o conteúdo se a largura for menor que a tela */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  width: 100%;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+/* Mantenha o restante do seu app.css como está, ele não afeta a largura principal */
 
 @keyframes logo-spin {
   from {

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "titulo": "Impacto da IA nos Empregos",
+    "descricao": "Uma visualização interativa sobre como a inteligência artificial está moldando o mercado de trabalho globalmente.",
+    "url": "https://example.com/visualizacao/ia-empregos",
+    "imagemUrl": "https://via.placeholder.com/400x250/2563eb/ffffff?text=IA+e+Empregos"
+  },
+  {
+    "id": "2",
+    "titulo": "Eleições 2024: Análise de Sentimento",
+    "descricao": "Dados em tempo real da análise de sentimento de mídias sociais sobre os principais candidatos e tópicos eleitorais.",
+    "url": "https://example.com/visualizacao/eleicoes-2024",
+    "imagemUrl": "https://via.placeholder.com/400x250/065f46/ffffff?text=Eleicoes+2024"
+  }
+  
+]
