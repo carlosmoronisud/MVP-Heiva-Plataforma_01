@@ -14,7 +14,7 @@ const VISUALIZACOES_FORM_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/A
 const PUBLICACOES_FORM_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbztOolc0gm0WEw5xM67AvE0GpG2dJjnJc8R2iB5qjVnCsiyO2SX94nFMm8LuhXUToRe3w/exec';
 
 // Use a URL BASE do SEU Apps Script para a planilha "sobre o projeto"
-const SOBRE_PROJETO_APPS_SCRIPT_BASE_URL = 'https://script.google.com/macros/s/AKfycbyEBa66JdhS4ZkKKcWYJq1Hx0PbbOyJkvpGYAjSMWmbxaz4Rd8yaqaM3O0bXWu-m87J/exec';
+const SOBRE_PROJETO_APPS_SCRIPT_BASE_URL = 'https://script.google.com/macros/s/AKfycbyEFDjrSJYE_1tB4-m_IJCFY20zPVsnTD3xmS3oqdAI5uE3UkVefbqrTXZEi32pyPUI/exec';
 
 export const dataUrls: DataUrls = {
   visualizacoes: VISUALIZACOES_FORM_APPS_SCRIPT_URL,
