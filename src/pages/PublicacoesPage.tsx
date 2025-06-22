@@ -1,9 +1,8 @@
 // src/pages/PublicacoesPage.tsx
 import React, { useEffect, useState } from 'react';
-import { loadData } from '../services/dataLoader';
+import { loadArrayData } from '../services/dataLoader'; // MUDANÇA AQUI: import loadArrayData
 import { dataUrls } from '../config/dataUrls';
 import type { IPublicacao } from '../types';
-
 
 const PublicacoesPage: React.FC = () => {
   const [publicacoes, setPublicacoes] = useState<IPublicacao[]>([]);
@@ -14,8 +13,9 @@ const PublicacoesPage: React.FC = () => {
     const fetchPublicacoes = async () => {
       setLoading(true);
       setError(null);
-      const data = await loadData<IPublicacao[]>(dataUrls.publicacoes);
-      if (data) {
+      // MUDANÇA AQUI: Use loadArrayData
+      const data = await loadArrayData<IPublicacao>(dataUrls.publicacoes);
+      if (data) { // 'data' agora é garantido como IPublicacao[] | null
         setPublicacoes(data);
       } else {
         setError('Não foi possível carregar as publicações. Verifique a URL ou o formato dos dados.');
@@ -35,7 +35,7 @@ const PublicacoesPage: React.FC = () => {
   }
 
   return (
-    <div className="container w-full max-w-6xl mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">Nossas Publicações</h1>
       <p className="text-lg text-center text-gray-600 mb-10 max-w-2xl mx-auto">
         Artigos, relatórios e outros materiais de pesquisa que complementam nossas visualizações.
@@ -49,7 +49,8 @@ const PublicacoesPage: React.FC = () => {
               <span className="font-medium">Autores:</span> {pub.autores}
             </p>
             <p className="text-gray-600 text-sm mb-3">
-              <span className="font-medium">Data:</span> {new Date(pub.data).toLocaleDateString('pt-BR')}
+              {/* Confirme se esta lógica de data está no seu arquivo */}
+              <span className="font-medium">Data:</span> {pub.data ? new Date(pub.data.split('/').reverse().join('-')).toLocaleDateString('pt-BR') : 'Data não disponível'}
             </p>
             <p className="text-gray-700 text-sm mb-4 line-clamp-3">{pub.resumo}</p>
             <a

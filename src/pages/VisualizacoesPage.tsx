@@ -1,6 +1,6 @@
 // src/pages/VisualizacoesPage.tsx
 import React, { useEffect, useState } from 'react';
-import { loadData } from '../services/dataLoader';
+import { loadArrayData } from '../services/dataLoader'; // MUDANÇA AQUI: import loadArrayData
 import { dataUrls } from '../config/dataUrls';
 import type { IVisualizacao } from '../types';
 import CardVisualizacao from '../components/CardVisualizacao';
@@ -14,8 +14,9 @@ const VisualizacoesPage: React.FC = () => {
     const fetchVisualizacoes = async () => {
       setLoading(true);
       setError(null);
-      const data = await loadData<IVisualizacao[]>(dataUrls.visualizacoes);
-      if (data) {
+      // MUDANÇA AQUI: Use loadArrayData
+      const data = await loadArrayData<IVisualizacao>(dataUrls.visualizacoes);
+      if (data) { // 'data' agora é garantido como IVisualizacao[] | null
         setVisualizacoes(data);
       } else {
         setError('Não foi possível carregar as visualizações. Verifique a URL ou o formato dos dados.');
@@ -35,8 +36,8 @@ const VisualizacoesPage: React.FC = () => {
   }
 
   return (
-    <div className="container w-full max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">Seja bem vindo a Heiwa-Viz</h1>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">Plataforma de Visualização de Debates</h1>
       <p className="text-lg text-center text-gray-600 mb-10 max-w-2xl mx-auto">
         Explore nossas visualizações interativas sobre diversos debates e temas relevantes.
       </p>

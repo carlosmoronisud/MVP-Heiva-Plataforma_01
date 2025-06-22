@@ -1,46 +1,66 @@
 // src/services/dataLoader.ts
 
 /**
- * Carrega dados JSON de uma URL.
- * Se isSingleObject for true, espera e retorna um único objeto (T | null).
- * Caso contrário (padrão), espera e retorna um array de objetos (T[] | null).
- * @param url A URL do arquivo JSON.
- * @param isSingleObject Opcional. Se true, a função espera um único objeto como resposta JSON.
- * @returns Uma Promise que resolve com os dados JSON.
+ * Carrega um array de objetos JSON de uma URL.
+ * Retorna null em caso de erro ou se a resposta não for um array válido.
+ * @param url A URL da API.
+ * @returns Uma Promise que resolve com um array de T ou null.
  */
-export async function loadData<T>(url: string, isSingleObject: boolean = false): Promise<T | T[] | null> {
+export async function loadArrayData<T>(url: string): Promise<T[] | null> {
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    const rawData = await response.json(); // Pega a resposta bruta
+    const rawData = await response.json();
 
-    if (isSingleObject) {
-      // Se for um objeto único, mas o Apps Script retornou um array de 1 elemento,
-      // pegamos o primeiro elemento.
-      if (Array.isArray(rawData) && rawData.length > 0) {
-        return rawData[0] as T; // Retorna o primeiro elemento do array como T
-      } else if (!Array.isArray(rawData)) {
-        return rawData as T; // Retorna o próprio dado como T se já for um objeto
-      } else {
-        return null; // Array vazio quando esperava um objeto
-      }
+    if (Array.isArray(rawData)) {
+      // Se a resposta é um array, fazemos o cast para T[]
+      return rawData as T[];
+    } else if (rawData !== null && typeof rawData === 'object') {
+      // Se a resposta é um objeto único (inesperado quando esperando um array),
+      // o envolvemos em um array para compatibilidade com o consumer.
+      console.warn(`loadArrayData: Esperava um array para ${url}, mas recebeu um único objeto. Envolvendo em array.`);
+      return [rawData] as T[];
     } else {
-      // ESTA É A MUDANÇA CRUCIAL: Se não for single object, SEMPRE retorne um array.
-      // Mesmo que o JSON da API retorne um único objeto acidentalmente,
-      // queremos que o consumer (as páginas Visualizacoes/Publicacoes) sempre recebam um array.
-      if (Array.isArray(rawData)) {
-        return rawData as T[];
-      } else {
-        // Se esperávamos um array, mas recebemos um único objeto (situação inesperada, mas defensiva)
-        // Envolvemos-o em um array ou retornamos um array vazio.
-        console.warn(`loadData: Esperava array para ${url}, mas recebeu um objeto. Envolvendo em array.`);
-        return [rawData] as T[]; // Coloca o objeto dentro de um array
-      }
+      // Outros casos (null, string, number, etc. inesperados)
+      console.warn(`loadArrayData: Esperava array para ${url}, mas recebeu tipo não array ou vazio inesperado:`, rawData);
+      return []; // Retorna array vazio para evitar problemas no frontend
     }
   } catch (error) {
-    console.error("Erro ao carregar dados:", error);
+    console.error(`Erro ao carregar array de dados de ${url}:`, error);
+    return null;
+  }
+}
+
+/**
+ * Carrega um único objeto JSON de uma URL.
+ * Retorna null em caso de erro ou se a resposta não for um objeto válido.
+ * @param url A URL da API.
+ * @returns Uma Promise que resolve com um objeto T ou null.
+ */
+export async function loadSingleObjectData<T>(url: string): Promise<T | null> {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const rawData = await response.json();
+
+    if (!Array.isArray(rawData) && rawData !== null && typeof rawData === 'object') {
+      // Se a resposta é um único objeto diretamente, o retornamos.
+      return rawData as T;
+    } else if (Array.isArray(rawData) && rawData.length > 0 && rawData[0] !== null && typeof rawData[0] === 'object') {
+      // Se a resposta é um array com um elemento, pegamos o primeiro objeto.
+      console.warn(`loadSingleObjectData: Esperava um objeto único para ${url}, mas recebeu um array. Pegando o primeiro elemento.`);
+      return rawData[0] as T;
+    } else {
+      // Caso contrário, não encontramos o objeto esperado.
+      console.warn(`loadSingleObjectData: Esperava um objeto único para ${url}, mas recebeu formato inesperado:`, rawData);
+      return null;
+    }
+  } catch (error) {
+    console.error(`Erro ao carregar objeto único de dados de ${url}:`, error);
     return null;
   }
 }
