@@ -7,13 +7,18 @@ const Header: React.FC = () => {
     <header className="bg-gray-900 text-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold text-blue-400 hover:text-blue-300 transition duration-300">
-          <img src="https://ik.imagekit.io/8h7kfljfc/heiwa/heiwa-3.png?updatedAt=1750436285620" alt="Logo" className="h-8 inline-block mr-2" />
+          DebateViz
         </Link>
         <nav>
           <ul className="flex space-x-6">
             <li>
               <Link to="/" className="hover:text-blue-400 transition duration-300">
-                Visualizações
+                Início {/* MUDANÇA: Link para a nova HomePage */}
+              </Link>
+            </li>
+            <li>
+              <Link to="/visualizacoes" className="hover:text-blue-400 transition duration-300">
+                Visualizações {/* MUDANÇA: Se a rota foi alterada */}
               </Link>
             </li>
             <li>
@@ -22,10 +27,11 @@ const Header: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link to="/sobre" className="hover:text-blue-400 transition duration-300">
-                Sobre o Projeto
+              <Link to="/membros" className="hover:text-blue-400 transition duration-300">
+                Equipe {/* MUDANÇA: Novo link para MembrosPage */}
               </Link>
             </li>
+            {/* Se você tinha links de cadastro, eles podem ficar aqui ou em outro lugar */}
           </ul>
         </nav>
       </div>

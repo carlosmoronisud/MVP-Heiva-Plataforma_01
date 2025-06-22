@@ -5,7 +5,9 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import VisualizacoesPage from './pages/VisualizacoesPage';
 import PublicacoesPage from './pages/PublicacoesPage';
-import SobreProjetoPage from './pages/SobreProjetoPage';
+// REMOVA: import SobreProjetoPage from './pages/SobreProjetoPage';
+import HomePage from './pages/HomePage';       // NOVA IMPORTAÇÃO
+import MembrosPage from './pages/MembrosPage'; // NOVA IMPORTAÇÃO (antiga SobreProjetoPage)
 
 const App: React.FC = () => {
   return (
@@ -14,10 +16,12 @@ const App: React.FC = () => {
         <Header />
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<VisualizacoesPage />} />
+            <Route path="/" element={<HomePage />} /> {/* MUDANÇA: Home agora é a raiz */}
+            <Route path="/visualizacoes" element={<VisualizacoesPage />} /> {/* Nova rota para visualizações */}
             <Route path="/publicacoes" element={<PublicacoesPage />} />
-            <Route path="/sobre" element={<SobreProjetoPage />} />
-            {/* Adicione outras rotas conforme necessário */}
+            <Route path="/membros" element={<MembrosPage />} /> {/* NOVA ROTA para Membros */}
+            {/* Opcional: Remover a rota /sobre se não for mais usada */}
+            {/* <Route path="/sobre" element={<SobreProjetoPage />} /> */}
           </Routes>
         </main>
         <Footer />
