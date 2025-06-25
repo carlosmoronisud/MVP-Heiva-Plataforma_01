@@ -1,4 +1,3 @@
-// src/services/dataLoader.ts
 
 /**
  * Carrega um array de objetos JSON de uma URL.

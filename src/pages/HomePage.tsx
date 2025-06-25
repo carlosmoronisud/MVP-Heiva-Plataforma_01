@@ -1,10 +1,8 @@
-// src/pages/HomePage.tsx
+
 import React, { useEffect, useState } from 'react';
 import { loadSingleObjectData, loadArrayData } from '../services/dataLoader';
 import { dataUrls } from '../config/dataUrls';
-import type { IConteudoPrincipal, IEntidadeCard } from '../types'; // APENAS essas
-
-// ... (resto do código) ...
+import type { IConteudoPrincipal, IEntidadeCard } from '../types';
 
 
 const HomePage: React.FC = () => {
@@ -59,7 +57,7 @@ const HomePage: React.FC = () => {
   }
 
   // --- Componente de Card Reutilizável para Entidades (Financiadores) ---
-  // Podemos criar um CardEntidade simples aqui ou reutilizar o CardInfo
+  // Cria um CardEntidade simples aqui que pode ser copiado ou reutilizar o CardInfo
   const CardEntidade: React.FC<{ item: IEntidadeCard }> = ({ item }) => (
     <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center text-center transform transition duration-300 hover:scale-105 hover:shadow-lg">
       {item.logoUrl && (

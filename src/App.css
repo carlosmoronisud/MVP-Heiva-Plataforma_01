@@ -1,15 +1,8 @@
 #root {
-  /* Remova ou comente a linha abaixo */
-  /* max-width: 1280px; */
-
-  /* Mantenha estas, elas centralizam o conteúdo se a largura for menor que a tela */
-  margin: 0 auto;
   padding: 2rem;
   text-align: center;
   width: 100%;
 }
-
-/* Mantenha o restante do seu app.css como está, ele não afeta a largura principal */
 
 @keyframes logo-spin {
   from {

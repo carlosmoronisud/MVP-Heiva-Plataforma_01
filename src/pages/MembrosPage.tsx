@@ -1,11 +1,11 @@
-// src/pages/MembrosPage.tsx
+
 import React, { useEffect, useState } from 'react';
 import { loadArrayData } from '../services/dataLoader'; // Apenas loadArrayData
 import { dataUrls } from '../config/dataUrls';
 import type { IPessoaCard } from '../types'; // Manter interfaces relevantes
 
 const MembrosPage: React.FC = () => {
-  // O estado agora foca apenas nos membros
+  // O estado foca apenas nos membros
   const [membrosAtuais, setMembrosAtuais] = useState<IPessoaCard[]>([]);
   const [membrosAnteriores, setMembrosAnteriores] = useState<IPessoaCard[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -47,8 +47,8 @@ const MembrosPage: React.FC = () => {
   }
 
   // --- Componente de Card Reutilizável para Pessoas ---
-  // Copiado do SobreProjetoPage original.
-  const CardInfo: React.FC<{ item: IPessoaCard }> = ({ item }) => { // Tipo agora é apenas IPessoaCard
+  
+  const CardInfo: React.FC<{ item: IPessoaCard }> = ({ item }) => { // Tipo é apenas IPessoaCard
     const getLinkText = (url: string): string => {
       if (!url) return '';
       url = url.toLowerCase();

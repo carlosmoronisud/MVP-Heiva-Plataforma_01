@@ -1,6 +1,6 @@
-// src/pages/PublicacoesPage.tsx
+
 import React, { useEffect, useState } from 'react';
-import { loadArrayData } from '../services/dataLoader'; // MUDANÇA AQUI: import loadArrayData
+import { loadArrayData } from '../services/dataLoader'; 
 import { dataUrls } from '../config/dataUrls';
 import type { IPublicacao } from '../types';
 
@@ -13,9 +13,9 @@ const PublicacoesPage: React.FC = () => {
     const fetchPublicacoes = async () => {
       setLoading(true);
       setError(null);
-      // MUDANÇA AQUI: Use loadArrayData
+      
       const data = await loadArrayData<IPublicacao>(dataUrls.publicacoes);
-      if (data) { // 'data' agora é garantido como IPublicacao[] | null
+      if (data) { // 'data'  é garantido como IPublicacao[] | null
         setPublicacoes(data);
       } else {
         setError('Não foi possível carregar as publicações. Verifique a URL ou o formato dos dados.');
@@ -49,7 +49,7 @@ const PublicacoesPage: React.FC = () => {
               <span className="font-medium">Autores:</span> {pub.autores}
             </p>
             <p className="text-gray-600 text-sm mb-3">
-              {/* Confirme se esta lógica de data está no seu arquivo */}
+              
               <span className="font-medium">Data:</span> {pub.data ? new Date(pub.data.split('/').reverse().join('-')).toLocaleDateString('pt-BR') : 'Data não disponível'}
             </p>
             <p className="text-gray-700 text-sm mb-4 line-clamp-3">{pub.resumo}</p>

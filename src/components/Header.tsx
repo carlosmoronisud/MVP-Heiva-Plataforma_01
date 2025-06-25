@@ -1,4 +1,4 @@
-// src/components/Header.tsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -13,12 +13,12 @@ const Header: React.FC = () => {
           <ul className="flex space-x-6">
             <li>
               <Link to="/" className="hover:text-blue-400 transition duration-300">
-                Início {/* MUDANÇA: Link para a nova HomePage */}
+                Início {/* HomePage */}
               </Link>
             </li>
             <li>
               <Link to="/visualizacoes" className="hover:text-blue-400 transition duration-300">
-                Visualizações {/* MUDANÇA: Se a rota foi alterada */}
+                Visualizações {/* VisualizationsPage */}
               </Link>
             </li>
             <li>
@@ -28,10 +28,10 @@ const Header: React.FC = () => {
             </li>
             <li>
               <Link to="/membros" className="hover:text-blue-400 transition duration-300">
-                Equipe {/* MUDANÇA: Novo link para MembrosPage */}
+                Equipe {/* MembersPage */}
               </Link>
             </li>
-            {/* Se você tinha links de cadastro, eles podem ficar aqui ou em outro lugar */}
+            {/* Futuras implementações */}
           </ul>
         </nav>
       </div>

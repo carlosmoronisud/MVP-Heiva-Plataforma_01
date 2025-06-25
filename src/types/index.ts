@@ -1,4 +1,3 @@
-// src/types/index.ts
 
 export interface IVisualizacao {
   id: string; // Exemplo: Coluna 'ID' na planilha
@@ -6,7 +5,7 @@ export interface IVisualizacao {
   descricao: string; // Coluna 'Descricao'
   url: string; // Coluna 'URL' (link para a visualização externa)
   imagemUrl?: string; // Coluna 'ImagemURL' (opcional, para um ícone/imagem do card)
-  // Adicione outras propriedades relevantes para suas visualizações
+  // Outras propriedades relevantes para suas visualizações
 }
 
 export interface IPublicacao {
@@ -16,7 +15,7 @@ export interface IPublicacao {
   data: string; // Ex: 'AAAA-MM-DD'
   resumo: string;
   url: string; // Link para a publicação externa
-  // Adicione outras propriedades relevantes para suas publicações
+  // Outras propriedades relevantes para suas publicações
 }
 
 export interface ISobreProjeto {
@@ -26,11 +25,8 @@ export interface ISobreProjeto {
   // Exemplo: para cards de membros/fases, você pode ter um array aqui
   // membros?: IMembro[];
 }
-// src/types/index.ts
 
-// ... (Mantenha IVisualizacao e IPublicacao aqui) ...
-
-// Nova interface para o conteúdo principal da página Sobre (lida da aba 'sobre1')
+// Nova interface para o conteúdo principal da página Sobre (lida da aba 'sobre')
 export interface IConteudoPrincipal {
   id: string; // ID gerado pelo script para essa única entrada
   titulo: string;

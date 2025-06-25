@@ -1,6 +1,6 @@
-// src/pages/VisualizacoesPage.tsx
+
 import React, { useEffect, useState } from 'react';
-import { loadArrayData } from '../services/dataLoader'; // MUDANÇA AQUI: import loadArrayData
+import { loadArrayData } from '../services/dataLoader'; 
 import { dataUrls } from '../config/dataUrls';
 import type { IVisualizacao } from '../types';
 import CardVisualizacao from '../components/CardVisualizacao';
@@ -14,9 +14,9 @@ const VisualizacoesPage: React.FC = () => {
     const fetchVisualizacoes = async () => {
       setLoading(true);
       setError(null);
-      // MUDANÇA AQUI: Use loadArrayData
+      
       const data = await loadArrayData<IVisualizacao>(dataUrls.visualizacoes);
-      if (data) { // 'data' agora é garantido como IVisualizacao[] | null
+      if (data) { // 'data' é garantido como IVisualizacao[] | null
         setVisualizacoes(data);
       } else {
         setError('Não foi possível carregar as visualizações. Verifique a URL ou o formato dos dados.');

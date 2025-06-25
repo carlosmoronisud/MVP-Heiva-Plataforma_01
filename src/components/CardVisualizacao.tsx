@@ -1,4 +1,4 @@
-// src/components/CardVisualizacao.tsx
+
 import React from 'react';
 import type { IVisualizacao } from '../types';
 
