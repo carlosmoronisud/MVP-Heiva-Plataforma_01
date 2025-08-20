@@ -5,32 +5,40 @@
  * @param url A URL da API.
  * @returns Uma Promise que resolve com um array de T ou null.
  */
-export async function loadArrayData<T>(url: string): Promise<T[] | null> {
+
+
+export const loadArrayData = async <T>(url: string): Promise<T[]> => {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new Error(`Falha ao buscar dados de ${url}: ${response.statusText}`);
     }
+
     const rawData = await response.json();
 
-    if (Array.isArray(rawData)) {
-      // Se a resposta é um array, fazemos o cast para T[]
+    // Verificação e correção do formato de dados.
+    // O erro 'esperava um array, mas recebeu um único objeto' indica que a resposta do script
+    // está encapsulada em um objeto, como: { data: [...] }.
+    // Esta lógica adapta o comportamento para suportar ambos os casos,
+    // garantindo a compatibilidade.
+    if (rawData && typeof rawData === 'object' && !Array.isArray(rawData) && rawData.data) {
+      // Se a resposta é um objeto com uma chave 'data' que é um array, use esse array.
+      console.log(`loadArrayData: Recebeu um objeto com a chave 'data'. Extraindo o array...`);
+      return rawData.data as T[];
+    } else if (Array.isArray(rawData)) {
+      // Se a resposta já é um array, use-o diretamente.
       return rawData as T[];
-    } else if (rawData !== null && typeof rawData === 'object') {
-      // Se a resposta é um objeto único (inesperado quando esperando um array),
-      // o envolvemos em um array para compatibilidade com o consumer.
-      console.warn(`loadArrayData: Esperava um array para ${url}, mas recebeu um único objeto. Envolvendo em array.`);
-      return [rawData] as T[];
     } else {
-      // Outros casos (null, string, number, etc. inesperados)
-      console.warn(`loadArrayData: Esperava array para ${url}, mas recebeu tipo não array ou vazio inesperado:`, rawData);
-      return []; // Retorna array vazio para evitar problemas no frontend
+      // Se o formato não é o esperado, loga um aviso e tenta converter.
+      // A sua lógica atual já faz isso, mas esta é mais explícita.
+      console.warn(`loadArrayData: Esperava um array para ${url}, mas recebeu um formato inesperado.`);
+      return Array.isArray(rawData) ? rawData : [rawData];
     }
   } catch (error) {
-    console.error(`Erro ao carregar array de dados de ${url}:`, error);
-    return null;
+    console.error(`Erro em loadArrayData para ${url}:`, error);
+    throw error;
   }
-}
+};
 
 /**
  * Carrega um único objeto JSON de uma URL.

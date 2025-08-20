@@ -51,6 +51,7 @@ export interface IEntidadeCard {
   id: string; // Gerado pelo script
   nome: string;
   logoUrl?: string;
+  compact?: boolean; 
   // Não tem 'tipo' aqui porque já sabemos que é financiador pela aba de origem
 }
 
@@ -60,6 +61,15 @@ export interface ISobreProjetoPageData {
   membrosAtuais: IPessoaCard[];
   membrosAnteriores: IPessoaCard[];
   financiadores: IEntidadeCard[];
+}
+
+export interface INoticia {
+  id: string;
+  titulo: string;
+  resumo: string;
+  data: string;
+  linkUrl: string;
+  imagemUrl?: string; 
 }
 
 // Exemplo se você tiver cards de membros

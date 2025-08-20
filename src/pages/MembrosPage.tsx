@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import { loadArrayData } from '../services/dataLoader'; // Apenas loadArrayData
+import { loadArrayData } from '../services/dataLoader'; 
 import { dataUrls } from '../config/dataUrls';
-import type { IPessoaCard } from '../types'; // Manter interfaces relevantes
+import type { IPessoaCard } from '../types'; 
 
 const MembrosPage: React.FC = () => {
   // O estado foca apenas nos membros

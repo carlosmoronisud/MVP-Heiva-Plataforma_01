@@ -1,18 +1,13 @@
 //Interface models
 
-interface DataUrls {
-  visualizacoes: string;
-  publicacoes: string;
-  sobreProjetoPrincipal: string;
-  sobreProjetoMembros: string;
-  sobreProjetoFinanciadores: string;
-}
+
 interface DataUrls {
   visualizacoes: string;
   publicacoes: string;
   sobreProjetoPrincipal: string; 
   sobreProjetoMembros: string;   
-  sobreProjetoFinanciadores: string; 
+  sobreProjetoFinanciadores: string;
+  noticias: string ;
 }
 
 
@@ -32,4 +27,9 @@ export const dataUrls: DataUrls = {
   sobreProjetoPrincipal: `${SOBRE_PROJETO_APPS_SCRIPT_BASE_URL}?sheet=sobre`,
   sobreProjetoMembros: `${SOBRE_PROJETO_APPS_SCRIPT_BASE_URL}?sheet=membros`,
   sobreProjetoFinanciadores: `${SOBRE_PROJETO_APPS_SCRIPT_BASE_URL}?sheet=financiadores`,
+  noticias: 'https://script.google.com/macros/s/AKfycbwtzXeCzE49r3_0sEIrLnvJdA1Hda8UF1UjteI6v1jRy7pRAT9GKKJ5wP6TIPLDMXYL/exec',
 };
+
+
+
+
