@@ -7,6 +7,7 @@ const Header: React.FC = () => {
     <header className="bg-verdeFechado text-white p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold text-blue-400 hover:text-blue-300 transition duration-300">
+          <img src="https://ik.imagekit.io/8h7kfljfc/heiwa/CIBERDEM%201.png?updatedAt=1756774054692" alt="Logo" className="object-contain h-16 inline-block mr-2" />
           <img src="https://ik.imagekit.io/8h7kfljfc/heiwa/width_550.png?updatedAt=1755655163585" alt="Logo" className="object-cover w-36 h-8 inline-block mr-2" />
         </Link>
         <nav>
@@ -28,7 +29,7 @@ const Header: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link to="/debates" className="hover:text-blue-400 transition duration-300">
+              <Link to="/eixos" className="hover:text-blue-400 transition duration-300">
                 Eixos
               </Link>
             </li>

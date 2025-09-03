@@ -8,6 +8,7 @@ import PublicacoesPage from './pages/PublicacoesPage';
 
 import HomePage from './pages/HomePage';       
 import MembrosPage from './pages/MembrosPage';
+import EixosPage from './pages/EixosPage';
 
 const App: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const App: React.FC = () => {
             <Route path="/visualizacoes" element={<VisualizacoesPage />} />   {/* Página de Visualizações */}
             <Route path="/publicacoes" element={<PublicacoesPage />} /> {/* Página de Publicações */}
               <Route path="/membros" element={<MembrosPage />} /> {/* Página de Membros */}
+              <Route path="/eixos" element={<EixosPage />} /> {/* Página de Eixos do Projeto */}
               
             
           </Routes>

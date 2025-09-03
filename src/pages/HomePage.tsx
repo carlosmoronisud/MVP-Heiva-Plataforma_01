@@ -11,7 +11,7 @@ import CardNoticia from '../components/CardNoticia';
 
 
 
-const sobreImageUrl = 'https://ik.imagekit.io/8h7kfljfc/heiwa/c25ac816-83d8-45e8-a7ef-f30c7563d9f9.png?updatedAt=1755710018334';
+// const sobreImageUrl = 'https://ik.imagekit.io/8h7kfljfc/heiwa/c25ac816-83d8-45e8-a7ef-f30c7563d9f9.png?updatedAt=1755710018334';
 
 const HomePage: React.FC = () => {
   const [conteudoPrincipal, setConteudoPrincipal] = useState<IConteudoPrincipal | null>(null);
@@ -89,16 +89,16 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 max-w-6xl rounded-b-xl">
+    <div className="container mx-auto px-4 max-w-6xl rounded-b-xl p-2 rounded-xl">
       <motion.section
-        className="rounded-b-xl relative h-screen flex flex-col justify-center items-center text-center text-white bg-cover bg-center"
+        className="rounded-xl relative h-screen flex flex-col justify-center items-center text-center text-white bg-cover bg-center"
         style={{ backgroundImage: `url('/path-to-your-hero-image.jpg')` }}
         variants={heroContainerVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="absolute inset-0 bg-black opacity-80 rounded-b-xl">
-          <img src="https://ik.imagekit.io/8h7kfljfc/heiwa/ChatGPT%20Image%20Aug%2020,%202025,%2009_28_54%20AM.png?updatedAt=1755692991313" alt="Hero Background" className="w-full h-full object-cover opacity-50 rounded-b-xl" />
+        <div className="absolute inset-0 bg-black opacity-90 rounded-xl">
+          <img src="https://ik.imagekit.io/8h7kfljfc/heiwa/hero.png?updatedAt=1756774057153" alt="Hero Background" className="w-full h-full object-cover opacity-50 rounded-xl" />
         </div>
         <div className="relative z-10 p-6 sm:p-12 rounded-xl">
           <motion.h1 
@@ -118,18 +118,18 @@ const HomePage: React.FC = () => {
             variants={heroItemVariants}
           >
                      
-            <a href="/visualizacoes" className="bg-green-800 text-white border-2 border-white hover:bg-primarygreen   font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+            {/* <a href="/visualizacoes" className="bg-green-800 text-white border-2 border-white hover:bg-primarygreen   font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
              Resultados
-            </a>
-            <a href="/resultados" className="bg-gray-100  border-2 border-green-500 hover:bg-primarygreen hover:text-white text-greenbackground font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
-             Eixos
+            </a> */}
+            <a href="/eixos" className="bg-gray-100  border-4 border-green-500 hover:bg-primarygreen hover:text-white text-greenbackground font-bold py-4 px-16 text-2xl rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+             Eixos do Projeto
             </a>             
-             <a href="/publicacoes" className="bg-green-800 text-white border-2 border-white hover:bg-primarygreen   font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+             {/* <a href="/publicacoes" className="bg-green-800 text-white border-2 border-white hover:bg-primarygreen   font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
              Publicações
             </a>
             <a href="/membros" className="bg-white  border-2 border-green-500 hover:bg-primarygreen hover:text-primarygreen text-greenbackground font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
               Membros
-            </a> 
+            </a>  */}
           </motion.div>
         </div>
       </motion.section>
@@ -150,7 +150,7 @@ const HomePage: React.FC = () => {
         >
         </motion.h2>
         <AboutSection />
-        <img src={sobreImageUrl} alt="Sobre o Projeto HEIWA" className="h-50 w-auto object-contain mx-auto mb-8  rounded-b-xl"></img>
+        {/* <img src={sobreImageUrl} alt="Sobre o Projeto HEIWA" className="h-50 w-auto object-contain mx-auto mb-8  rounded-b-xl"></img> */}
          </motion.div>
       
 

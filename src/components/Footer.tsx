@@ -36,6 +36,11 @@ const Footer: React.FC = () => {
           <div className="flex-1">
             <Link to="/" className="flex items-center space-x-2">
               <img 
+                src="https://ik.imagekit.io/8h7kfljfc/heiwa/CIBERDEM%201.png?updatedAt=1756774054692" 
+                alt="Logo do Projeto Heiwa" 
+                className="w-24 h-auto object-contain" 
+              />
+              <img 
                 src="https://ik.imagekit.io/8h7kfljfc/heiwa/width_550.png?updatedAt=1755655163585" 
                 alt="Logo do Projeto Heiwa" 
                 className="w-56 h-auto object-contain" 
