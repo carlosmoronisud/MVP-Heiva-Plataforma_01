@@ -9,35 +9,35 @@ const eixosData = [
     title: 'Curadoria',
     subtitle: 'Identificação, seleção e organização de datasets de conteúdos de redes sociais.',
     imageUrl: 'https://ik.imagekit.io/8h7kfljfc/heiwa/%C3%8Dcone_de_Rede_Minimalista_Verde-removebg-preview.png?updatedAt=1756776632494',
-    linkTo: '/eixos/coleta'
+    linkTo: '/eixos/curadoria'
   },
   {
     id: 2,
     title: 'Extração e Limpeza',
     subtitle: 'Ferramentas de extração e tratamento de dados de redes sociais.',
     imageUrl: 'https://ik.imagekit.io/8h7kfljfc/heiwa/Grade_de_Grade_Neon_Verde-removebg-preview.png?updatedAt=1756776632445',
-    linkTo: '/eixos/extracao'
+    linkTo: '/eixos/extracaoLimpeza'
   },
   {
     id: 3,
     title: 'Mineração de Argumentos',
     subtitle: 'Modelos e ferramentas de mineração de argumentos em conteúdos de redes sociais.',
     imageUrl: 'https://ik.imagekit.io/8h7kfljfc/heiwa/Martelo%20e%20machado%20cruzados.png?updatedAt=1756776448938',
-    linkTo: '/eixos/estruturacao'
+    linkTo: '/eixos/mineracaoArgumentos'
   },
   {
     id: 4,
     title: 'Visualização de Discussões',
     subtitle: 'Ferramentas de visualização de discussões em redes sociais.',
     imageUrl: 'https://ik.imagekit.io/8h7kfljfc/heiwa/ChatGPT%20Image%20Sep%201,%202025,%2010_26_51%20PM.png?updatedAt=1756776448920',
-    linkTo: '/eixos/analise'
+    linkTo: '/eixos/visualizacaoDiscussoes'
   },
   {
     id: 5,
     title: 'Aspectos Éticos e Legais',
     subtitle: 'Estudos de aspectos éticos e legais do uso de dados em redes sociais em pesquisas.',
     imageUrl: 'https://ik.imagekit.io/8h7kfljfc/heiwa/ChatGPT_Image_Sep_3__2025__05_27_33_PM-removebg-preview.png?updatedAt=1756931355047',
-    linkTo: '/eixos/visualizacao'
+    linkTo: '/eixos/aspectosEticosLegais'
   },
 ];
 

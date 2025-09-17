@@ -72,6 +72,15 @@ export interface INoticia {
   imagemUrl?: string; 
 }
 
+
+export interface IConteudoEixo {
+  id: string;
+  titulo: string;
+  descricao: string;
+  imagemUrl: string;
+  acaoUrl: string;
+}
+
 // Exemplo se você tiver cards de membros
 // export interface IMembro {
 //   nome: string;

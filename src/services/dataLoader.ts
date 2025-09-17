@@ -1,12 +1,11 @@
+// src/services/dataLoader.ts
 
 /**
  * Carrega um array de objetos JSON de uma URL.
- * Retorna null em caso de erro ou se a resposta não for um array válido.
+ * Retorna um array vazio em caso de erro ou se a resposta não for um array válido.
  * @param url A URL da API.
- * @returns Uma Promise que resolve com um array de T ou null.
+ * @returns Uma Promise que resolve com um array de T ou um array vazio.
  */
-
-
 export const loadArrayData = async <T>(url: string): Promise<T[]> => {
   try {
     const response = await fetch(url);
@@ -16,27 +15,21 @@ export const loadArrayData = async <T>(url: string): Promise<T[]> => {
 
     const rawData = await response.json();
 
-    // Verificação e correção do formato de dados.
-    // O erro 'esperava um array, mas recebeu um único objeto' indica que a resposta do script
-    // está encapsulada em um objeto, como: { data: [...] }.
-    // Esta lógica adapta o comportamento para suportar ambos os casos,
-    // garantindo a compatibilidade.
-    if (rawData && typeof rawData === 'object' && !Array.isArray(rawData) && rawData.data) {
-      // Se a resposta é um objeto com uma chave 'data' que é um array, use esse array.
+    // Lógica robusta para garantir que a resposta seja sempre um array de dados.
+    if (rawData && rawData.data) {
       console.log(`loadArrayData: Recebeu um objeto com a chave 'data'. Extraindo o array...`);
       return rawData.data as T[];
     } else if (Array.isArray(rawData)) {
-      // Se a resposta já é um array, use-o diretamente.
+      console.log(`loadArrayData: Recebeu um array. Utilizando diretamente.`);
       return rawData as T[];
     } else {
-      // Se o formato não é o esperado, loga um aviso e tenta converter.
-      // A sua lógica atual já faz isso, mas esta é mais explícita.
-      console.warn(`loadArrayData: Esperava um array para ${url}, mas recebeu um formato inesperado.`);
-      return Array.isArray(rawData) ? rawData : [rawData];
+      console.warn(`loadArrayData: Formato inesperado para ${url}. Retornando array vazio.`);
+      return [];
     }
   } catch (error) {
     console.error(`Erro em loadArrayData para ${url}:`, error);
-    throw error;
+    // Em caso de erro, retorna um array vazio para evitar que a aplicação quebre
+    return [];
   }
 };
 
@@ -55,14 +48,11 @@ export async function loadSingleObjectData<T>(url: string): Promise<T | null> {
     const rawData = await response.json();
 
     if (!Array.isArray(rawData) && rawData !== null && typeof rawData === 'object') {
-      // Se a resposta é um único objeto diretamente, o retornamos.
       return rawData as T;
     } else if (Array.isArray(rawData) && rawData.length > 0 && rawData[0] !== null && typeof rawData[0] === 'object') {
-      // Se a resposta é um array com um elemento, pegamos o primeiro objeto.
       console.warn(`loadSingleObjectData: Esperava um objeto único para ${url}, mas recebeu um array. Pegando o primeiro elemento.`);
       return rawData[0] as T;
     } else {
-      // Caso contrário, não encontramos o objeto esperado.
       console.warn(`loadSingleObjectData: Esperava um objeto único para ${url}, mas recebeu formato inesperado:`, rawData);
       return null;
     }
