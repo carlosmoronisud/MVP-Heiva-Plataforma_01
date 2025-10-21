@@ -102,7 +102,7 @@ const EixosPage: React.FC = () => {
           className="mt-16"
         >
           <Link
-            to="/resultados"
+            to="/visualizacoes"
             className="inline-block bg-primarygreen text-white font-bold py-4 px-24 text-lg rounded-full shadow-lg transition duration-300 transform hover:scale-105"
           >
             Resultados

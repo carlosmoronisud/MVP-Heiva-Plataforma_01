@@ -4,8 +4,6 @@ import { loadSingleObjectData } from '../../services/dataLoader';
 import { dataUrls } from '../../config/dataUrls';
 import type { IConteudoPrincipal } from '../../types';
 
-// URL da imagem que será usada como plano de fundo
-
 
 const AboutSection: React.FC = () => {
   // O estado e o useEffect precisam estar dentro do componente

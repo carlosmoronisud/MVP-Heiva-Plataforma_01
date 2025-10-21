@@ -19,4 +19,4 @@ const LoadingCircle: React.FC = () => {
   );
 };
 
-export default LoadingCircle;
+export default LoadingCircle

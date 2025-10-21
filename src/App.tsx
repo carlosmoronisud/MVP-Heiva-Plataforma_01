@@ -6,10 +6,12 @@ import Footer from './components/Footer';
 import VisualizacoesPage from './pages/VisualizacoesPage';
 import PublicacoesPage from './pages/PublicacoesPage';
 
-import HomePage from './pages/HomePage';       
+import HomePage from './pages/home/HomePage';       
 import MembrosPage from './pages/MembrosPage';
-import EixosPage from './pages/EixosPage';
-import EixoContentPage from './pages/EixoContentPage';
+import EixosPage from './pages/eixos/EixosPage';
+import EixoContentPage from './pages/eixos/EixoContentPage';
+import NoticiasPage from './pages/NoticiasPage';
+import SobrePage from './pages/Sobre';
 
 const App: React.FC = () => {
   return (
@@ -19,7 +21,9 @@ const App: React.FC = () => {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} /> {/* Página inicial */}
+            <Route path="/noticias" element={<NoticiasPage />} /> {/* Página de Notícias */}
             <Route path="/visualizacoes" element={<VisualizacoesPage />} />   {/* Página de Visualizações */}
+            <Route path="/sobre" element={<SobrePage />} />   {/* Página de Visualização específica */}
             <Route path="/publicacoes" element={<PublicacoesPage />} /> {/* Página de Publicações */}
               <Route path="/membros" element={<MembrosPage />} /> {/* Página de Membros */}
               <Route path="/eixos" element={<EixosPage />} /> {/* Página de Eixos do Projeto */}

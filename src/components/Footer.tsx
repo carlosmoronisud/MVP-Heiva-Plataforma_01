@@ -4,7 +4,7 @@ import { FaGithub, FaEnvelope, FaGlobe, FaMapMarkerAlt } from 'react-icons/fa';
 import type { IEntidadeCard } from '../types';
 import { loadArrayData } from '../services/dataLoader';
 import { dataUrls } from '../config/dataUrls'; 
-import CardEntidade from './CardEntidade'; 
+import CardEntidade from './cards/CardEntidade'; 
 
 const Footer: React.FC = () => {
   const [financiadores, setFinanciadores] = useState<IEntidadeCard[]>([]);
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
             <h3 className="text-white font-semibold text-lg mb-4">Navegação</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/" className="hover:text-white transition-colors duration-300">Notícias</Link>
+                <Link to="/noticias" className="hover:text-white transition-colors duration-300">Notícias</Link>
               </li>
               <li>
                 <Link to="/publicacoes" className="hover:text-white transition-colors duration-300">Publicações</Link>

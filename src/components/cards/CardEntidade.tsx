@@ -1,5 +1,5 @@
 import React from 'react';
-import type { IEntidadeCard } from '../types';
+import type { IEntidadeCard } from '../../types';
 
 
 

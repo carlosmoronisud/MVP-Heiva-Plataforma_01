@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { loadArrayData } from '../services/dataLoader'; 
 import { dataUrls } from '../config/dataUrls';
 import type { IPessoaCard } from '../types'; 
+import LoadingCircle from '../components/ui/LoadingDots';
+
 
 const MembrosPage: React.FC = () => {
   // O estado foca apenas nos membros
@@ -39,7 +41,7 @@ const MembrosPage: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-8 text-gray-700">Carregando membros...</div>;
+    return <LoadingCircle />;
   }
 
   if (error) {

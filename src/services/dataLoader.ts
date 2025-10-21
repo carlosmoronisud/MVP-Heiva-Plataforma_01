@@ -1,5 +1,3 @@
-// src/services/dataLoader.ts
-
 /**
  * Carrega um array de objetos JSON de uma URL.
  * Retorna um array vazio em caso de erro ou se a resposta não for um array válido.
