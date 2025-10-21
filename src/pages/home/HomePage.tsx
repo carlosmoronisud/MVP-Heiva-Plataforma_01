@@ -94,7 +94,7 @@ const HomePage: React.FC = () => {
                 bgColor="bg-green-50"
                 link="/publicacoes"
                 CardComponent={CardPublicacao}
-                dataType='publicacoes'
+               
             />
 
             {/* 4. Seção de Notícias em Carrossel */}
@@ -104,7 +104,7 @@ const HomePage: React.FC = () => {
                 bgColor="" 
                 link="/noticias"
                 CardComponent={CardNoticia}
-                dataType='noticias'
+                           
             />
         </div>
     );
