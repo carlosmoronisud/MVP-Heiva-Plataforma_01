@@ -12,7 +12,7 @@ const CardNoticia: React.FC<CardNoticiaProps> = ({ item }) => {
   console.log('URL da Imagem:', item.imagemurl);
   return (
     <motion.a
-      href={item.linkurl}
+      href={item.linkUrl}
       target="_blank"
       rel="noopener noreferrer"
       className="block bg-white rounded-lg shadow-md p-6 transform transition duration-400 hover:scale-105 hover:shadow-lg cursor-pointer"

@@ -1,7 +1,7 @@
 // src/components/ui/ReloadButton.tsx
 
 import React from 'react';
-import { FaSyncAlt } from 'react-icons/fa'; // Assumindo que você usa react-icons
+import { FaSyncAlt } from 'react-icons/fa'; 
 
 interface ReloadButtonProps {
   onClick: () => void;

@@ -1,16 +1,18 @@
 // src/pages/EixoContentPage.tsx
 
+import Seo from '../../components/Seo';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import type { IConteudoEixo } from '../../types';
 import { dataUrls } from '../../config/dataUrls';
+// loadArrayData AGORA DEVE ACEITAR forceRefresh
 import { loadArrayData } from '../../services/dataLoader';
 import LoadingCircle from '../../components/ui/LoadingDots';
-// Importando os novos/ajustados componentes
 import ReloadButton from '../../components/ui/ReloadButton'; 
 import BackButton from '../../components/ui/BackButton';
 import { EixoCard } from '../../components/cards/EixoCard';
+// NOTA: useSync FOI REMOVIDO PARA EVITAR CONFLITOS DE CACHE
 
 
 const ITEMS_PER_LOAD = 9; // Paginação em lotes de 9
@@ -23,9 +25,12 @@ const pageTitles: { [key: string]: string } = {
   visualizacaoDiscussoes: 'Visualização de Discussões',
   aspectosEticosLegais: 'Aspectos Éticos e Legais',
 };
+const descriptionBase = "Confira publicações, notícias e ferramentas relacionadas ao eixo de pesquisa ";
 
 const EixoContentPage: React.FC = () => {
   const { eixoName } = useParams<{ eixoName: string }>();
+  // 1. VARIÁVEIS LOCAIS (sem Hooks de Contexto)
+  // const { syncKey, forceSync } = useSync(); // <-- REMOVIDO!
   
   const [allConteudo, setAllConteudo] = useState<IConteudoEixo[]>([]);
   const [visibleConteudo, setVisibleConteudo] = useState<IConteudoEixo[]>([]);
@@ -34,7 +39,7 @@ const EixoContentPage: React.FC = () => {
   const [loadCount, setLoadCount] = useState<number>(1); 
 
   // Função centralizada para buscar e processar os dados
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async (forceRefresh: boolean = false) => { // <-- AGORA ACEITA forceRefresh
     setLoading(true);
     setError(null);
 
@@ -47,14 +52,11 @@ const EixoContentPage: React.FC = () => {
     }
 
     try {
-      const dataRaw = await loadArrayData<IConteudoEixo>(eixoUrl);
+      // 2. PASSA O ARGUMENTO para o serviço (ignora o Local Storage se true)
+      const dataRaw = await loadArrayData<IConteudoEixo>(eixoUrl, forceRefresh); 
       
       if (dataRaw) {
-        // NOTA: Não foi especificado um campo de data/ordenação para IConteudoEixo,
-        // então mantemos a ordem que veio da planilha, mas armazenamos no estado.
         setAllConteudo(dataRaw); 
-        
-        // 1. Paginação Inicial
         setVisibleConteudo(dataRaw.slice(0, ITEMS_PER_LOAD));
         setLoadCount(1);
       } else {
@@ -68,12 +70,18 @@ const EixoContentPage: React.FC = () => {
     }
   }, [eixoName]); // Depende do eixoName para buscar os dados corretos
 
-  // Efeito inicial e re-fetch quando o eixoName muda
+  // 3. Efeito inicial e re-fetch quando o eixoName muda (Sem syncKey!)
   useEffect(() => {
-    fetchData();
+    fetchData(); // Chamada padrão (forceRefresh=false)
   }, [fetchData]);
 
-  // Função para carregar mais itens
+  // 4. Handler para o Botão
+  const handleReload = () => {
+    // CHAMA O FETCH PASSANDO TRUE (ignora o cache local e faz a requisição de rede)
+    fetchData(true); 
+  }
+  
+  // Função para carregar mais itens (mantida)
   const handleLoadMore = () => {
     const nextLoadCount = loadCount + 1;
     const startIndex = loadCount * ITEMS_PER_LOAD;
@@ -99,7 +107,8 @@ const EixoContentPage: React.FC = () => {
             <p className="text-xl text-red-600 font-semibold mb-4">{error}</p>
             <div className="flex justify-center space-x-4">
                 <BackButton />
-                <ReloadButton onClick={fetchData} loading={loading} />
+                {/* BOTÃO CORRIGIDO: Usa handleReload */}
+                <ReloadButton onClick={handleReload} loading={loading} />
             </div>
         </div>
     );
@@ -112,7 +121,8 @@ const EixoContentPage: React.FC = () => {
             <p className="text-lg text-gray-500 mb-6">Nenhum conteúdo para este eixo encontrado.</p>
             <div className="flex justify-center space-x-4">
                 <BackButton />
-                <ReloadButton onClick={fetchData} loading={loading} />
+                {/* BOTÃO CORRIGIDO: Usa handleReload */}
+                <ReloadButton onClick={handleReload} loading={loading} />
             </div>
         </div>
     );
@@ -124,6 +134,10 @@ const EixoContentPage: React.FC = () => {
       
       {/* Cabeçalho e Botões de Ação */}
       <div className="relative flex flex-col md:flex-row md:justify-between md:items-center mb-12">
+      <Seo 
+        title={`${tituloDaPagina} | Hub de Pesquisa`} 
+        description={`${descriptionBase} ${tituloDaPagina}.`} 
+      />
         <div className="flex items-center space-x-4 mb-4 md:mb-0">
             <BackButton />
             <motion.h1 
@@ -137,8 +151,9 @@ const EixoContentPage: React.FC = () => {
         </div>
         
         {/* Botão de Recarregar no canto direito */}
-        <div className="md:absolute md:right-0 md:top-1/2 md:transform md:-translate-y-1/2 flex justify-end">
-            <ReloadButton onClick={fetchData} loading={loading} />
+        <div className="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 flex justify-end">
+            {/* BOTÃO CORRIGIDO: Usa handleReload */}
+            <ReloadButton onClick={handleReload} loading={loading} />
         </div>
       </div>
       

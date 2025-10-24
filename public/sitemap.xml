@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/</loc>
+    <lastmod>2025-10-24</lastmod> 
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/noticias</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/publicacoes</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/membros</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/eixos</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/sobre</loc>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/eixos/curadoria</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/eixos/extracaoLimpeza</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/eixos/mineracaoArgumentos</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/eixos/visualizacaoDiscussoes</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/eixos/aspectosEticosLegais</loc>
+    <priority>0.9</priority>
+  </url>
+  
+</urlset>

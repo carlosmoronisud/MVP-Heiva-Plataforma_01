@@ -3,151 +3,100 @@
 <div align="center">
 <img src="https://ik.imagekit.io/8h7kfljfc/heiwa/image.png?updatedAt=1750537214936" alt="Banner da Plataforma DebateViz">
 <br>
-<h3>Transformando dados complexos em visualizações acessíveis.</h3>
+<h3>Arquitetura Híbrida e Resiliente: Transformando dados complexos em visualizações acessíveis com latência mínima.</h3>
 </div>
 
 <br>
 
 ## 🎯 Sobre o Projeto
 
-A DebateViz é uma plataforma inovadora de visualização de dados, desenvolvida como um Produto Mínimo Viável (MVP) para demonstrar o potencial de tornar debates complexos e informações cruciais mais acessíveis e compreensíveis. Nosso objetivo é fornecer uma interface limpa, intuitiva e responsiva, que permite aos usuários explorar insights de diversas fontes de dados.
+A DebateViz - Heiwa é uma plataforma de visualização de dados desenvolvida como um MVP (Produto Mínimo Viável) e TCC, com o objetivo de resolver o desafio de **latência de dados** em arquiteturas de baixo custo.
 
-Este MVP foca na exibição de "cards de visualização" e "publicações" que apontam para artefatos externos (outras URLs), e uma seção "Sobre o Projeto" dinâmica.
-
-<br>
-
-## 🚀 Acesse a Demonstração (em breve)
-    
-✨ [Saiba Mais na Página 'Sobre o Projeto'](https://mvp-heiva-plataforma-01.vercel.app/)
-    
-📚 [Explore o Código (GitHub)](https://github.com/carlosmoronisud/MVP-Heiva-Plataforma_01)
+O sistema utiliza o Google Sheets como um CMS *Headless* e implementa uma arquitetura de cache de três camadas (Apps Script Cache, Local Storage e Configuração de Roteamento) para garantir a melhor performance e resiliência possível antes da migração para um backend dedicado (ex: Raspberry Pi ou Cloud Run).
 
 <br>
 
-## 🚧 Status do Projeto: Em Construção
+## 🚀 Acesso e Deploy (Mackenzie)
 
-Este é um MVP funcional e está em desenvolvimento contínuo. Novas funcionalidades, melhorias de UI/UX e fontes de dados serão adicionadas em fases futuras. Agradecemos sua compreensão e feedback!
+Este projeto está configurado para ser implantado no subdiretório do servidor Ciberdem.
+
+* **URL de Produção:** `https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/`
+* **Repositório:** [Explore o Código (GitHub)](https://github.com/carlosmoronisud/MVP-Heiva-Plataforma_01)
 
 <br>
 
-## 💡 Funcionalidades Atuais do MVP
+## 💡 Funcionalidades Chave do MVP
 
-- **Frontend Estático**: Aplicação de visualização sem backend próprio.
-- **Carga de Dados Dinâmica**: Conteúdo (visualizações, publicações, informações do projeto, membros, financiadores) é carregado diretamente de Planilhas Google Sheets publicadas via Google Apps Script.
-- **Cards de Visualização e Publicação**: Exibição clara e intuitiva de cards que direcionam para conteúdos externos.
-- **Página "Sobre o Projeto" Rica**:
-  - Conteúdo principal e localização (com link para Google Maps).
-  - Seções dinâmicas para "Membros Atuais", "Membros Anteriores" e "Financiadores", com cards estilizados (foto/logo, nome, função, links de contato).
-  - Nomes de links de contato inteligentes (ex: "LinkedIn", "Lattes", "GitHub").
-- **Inserção de Dados via Google Forms (Administrativo)**: Ferramentas externas (Google Forms) permitem que administradores cadastrem novas visualizações, publicações e membros, cujos dados são processados e servidos pelos Apps Scripts.
-- **Interface Responsiva**: Otimizada para visualização em diferentes tamanhos de tela.
+### Otimização e Performance (Diferencial Técnico)
+
+* **Cache Híbrido Avançado:** Implementação de caching de 30 minutos via **Google Apps Script CacheService** e caching de cliente via **Local Storage** no React.
+* **Rastreamento de Interação:** Configuração de base para **Google Analytics (GA4)** e **Google Search Console (GSC)** via tags no `index.html`.
+* **Carregamento Assíncrono (UX):** Carrega o conteúdo principal (Hero) instantaneamente e só depois carrega os carrosséis em *background*, melhorando a percepção de velocidade.
+* **Recarga Funcional:** Botões de `Reload` que **ignoram o cache local** (`loadArrayData(true)`) para buscar dados frescos do Apps Script.
+* **Tipagem para Velocidade:** Conversão de datas para **Timestamp (number)** nos Apps Scripts para eliminar o gargalo de formatação lenta e otimizar a ordenação no React.
+
+### Conteúdo e UI
+
+* **CMS Headless:** Conteúdo gerido 100% via Planilhas Google (Notícias, Publicações, Membros, Financiadores).
+* **SEO Dinâmico:** Uso do `react-helmet-async` para definir **títulos e meta descrições únicos** para cada rota (Ex: `/eixos/curadoria`), essencial para indexação do Google.
+* **Roteamento em Subdiretório:** Configuração pronta para o deploy no caminho `/apps/Plataforma_Heiwa/`.
 
 <br>
 
 ## 💻 Tecnologias Utilizadas
 
-Este projeto foi construído utilizando as seguintes tecnologias modernas de desenvolvimento frontend:
-
-- **React**: Biblioteca JavaScript para construção de interfaces de usuário.
-- **TypeScript**: Superset do JavaScript que adiciona tipagem estática, melhorando a robustez e manutenibilidade do código.
-- **Vite**: Ferramenta de build frontend extremamente rápida, que otimiza o ambiente de desenvolvimento e produção.
-- **Tailwind CSS**: Framework CSS de primeira classe para estilização rápida e responsiva, com foco em classes utilitárias.
-- **Google Sheets**: Utilizado como fonte de dados "backend" para o MVP.
-- **Google Apps Script**: Plataforma de desenvolvimento baseada em JavaScript que estende a funcionalidade do Google Workspace, usada aqui para transformar e servir dados das planilhas como JSON para a aplicação.
-- **React Router DOM**: Biblioteca para roteamento declarativo no React.
+-   **Frontend:** React, TypeScript, Vite, Tailwind CSS, Framer Motion.
+-   **Backend:** Google Sheets (CMS), Google Apps Script (API JSON com CacheService).
+-   **Análise:** Google Analytics (GA4), Google Search Console (GSC), Apache JMeter/k6 (Teste de Carga).
 
 <br>
 
-## 📂 Estrutura do Projeto
-```bash
-A estrutura de pastas do projeto foi organizada para manter a modularidade e a clareza, facilitando a navegação e a manutenção:
+## ⚙️ INSTRUÇÕES DE DEPLOY (Para Equipe de Infraestrutura)
 
-visualizacao-debates-mvp/
-├── public/ # Arquivos estáticos (imagens, etc.) e JSONs de teste (se usados)
-│ └── data/ # Para JSONs de teste, se o Apps Script não estiver em uso
-├── src/
-│ ├── assets/ # Imagens, ícones, fontes locais
-│ ├── components/ # Componentes React reutilizáveis (Header, Footer, CardVisualizacao, CardInfo, etc.)
-│ ├── config/ # Arquivos de configuração (ex: dataUrls.ts com URLs das APIs/Sheets)
-│ ├── pages/ # Componentes de página (VisualizacoesPage, PublicacoesPage, SobreProjetoPage)
-│ ├── services/ # Funções para interagir com APIs/dados externos (ex: dataLoader.ts)
-│ ├── types/ # Definições de tipos TypeScript (interfaces: IVisualizacao, IPublicacao, IConteudoPrincipal, etc.)
-│ ├── App.tsx # Componente principal da aplicação (configuração de rotas)
-│ ├── main.tsx # Ponto de entrada da aplicação
-│ └── index.css # CSS global (principalmente diretivas Tailwind)
-├── .gitignore # Arquivos/pastas a serem ignorados pelo Git
-├── index.html # Arquivo HTML principal
-├── package.json # Dependências e scripts do projeto
-├── postcss.config.js # Configuração do PostCSS (para Tailwind)
-├── README.md # Este arquivo!
-├── tailwind.config.js # Configuração do Tailwind CSS
-├── tsconfig.json # Configuração do TypeScript
-├── tsconfig.node.json # Configuração do TypeScript para o ambiente Node.js
-└── yarn.lock # Gerenciador de pacotes Yarn
+### 1. Configuração do Ambiente
 
-```
-<br>
+O roteamento e os *assets* do projeto foram configurados para rodar no subdiretório `/apps/Plataforma_Heiwa/`.
 
-## ⚙️ Como Rodar o Projeto
+* **Variável de Ambiente:** O arquivo `.env` deve conter: `VITE_BASE_PATH = /apps/Plataforma_Heiwa/`
+* **Configuração do Vite:** O `vite.config.ts` usa esta variável para definir o `base` do *build*.
+* **React Router DOM:** O `BrowserRouter` usa `basename={import.meta.env.BASE_URL}`.
 
-Para executar este projeto em sua máquina local:
+### 2. Comandos de Build e Implantação
 
-### Pré-requisitos:
-
-- Certifique-se de ter o Node.js (versão LTS recomendada) e o Yarn instalados.
-
-### Clone o Repositório:
+Para gerar a versão otimizada:
 
 ```bash
-git clone (https://github.com/carlosmoronisud/MVP-Heiva-Plataforma_01)
-cd viz
-```
-
-Instale as Dependências:
-bash
+# 1. Instala as dependências (se necessário)
 yarn install
-Configure o Tailwind CSS (se ainda não o fez):
-bash
-npx tailwindcss init -p
-(Certifique-se de configurar o tailwind.config.js e src/index.css conforme as instruções da Parte 1 da nossa conversa)
 
-Configure as Planilhas Google Sheets e Apps Scripts:
-Crie suas planilhas Google Sheets (VisualizacoesDebates, PublicacoesProjeto, SobreProjetoMVP) com as abas e dados conforme as instruções.
-
-Configure e implante os Google Apps Scripts para cada planilha, obtendo as URLs dos Web Apps.
-
-Atualize o arquivo src/config/dataUrls.ts com as URLs geradas pelos seus Apps Scripts.
-
-Inicie o Servidor de Desenvolvimento:
-bash
-yarn dev
-O projeto será aberto em seu navegador, geralmente em http://localhost:5173/.
-
-
-📦 Build para Produção
-Para gerar uma versão otimizada e estática da aplicação para deploy:
-
-bash
+# 2. Gera o build de produção
 yarn build
-Isso criará uma pasta dist/ na raiz do projeto, contendo todos os arquivos estáticos prontos para serem servidos por qualquer servidor web (ex: Nginx, Apache, ou serviços de hospedagem estática como Render, Netlify, Vercel).
 
+# 3. O resultado estará na pasta 'dist/'. 
+# Copie TODO o conteúdo da pasta 'dist/' para a URI final:
+# [https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/](https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/)
+```
+## 3. Arquivos Essenciais de SEO (Deploy)
+Os seguintes arquivos devem estar na raiz do subdiretório implantado (/apps/Plataforma_Heiwa/):
 
-☁️ Deploy
-Este MVP pode ser facilmente hospedado em serviços de hospedagem de sites estáticos. O processo geralmente envolve:
+index.html (Contém as tags GA4 e GSC).
 
-Fazer o build do projeto (yarn build).
+sitemap.xml
 
-Conectar seu repositório Git ao serviço de hospedagem (ex: Render, Netlify, Vercel).
+robots.txt
 
-Configurar o comando de build (yarn build ou npm run build) e o diretório de publicação (dist).
+## 4. Ações Pós-Deploy (Obrigatório)
+Após o deploy, as seguintes URLs devem ser verificadas e configuradas:
 
+GSC Verification: Acesse o Google Search Console e verifique a propriedade https://ciberdem.mack.com.br/apps/Plataforma_Heiwa/ usando a Tag HTML que está no index.html.
 
-✨ Contribuições
-Este projeto está em fase de MVP. Sugestões e contribuições para melhorias são sempre bem-vindas!
+Submeter Sitemap: Submeta o sitemap.xml no painel do GSC (caminho: /apps/Plataforma_Heiwa/sitemap.xml).
 
+# ⚠️ Relatório de Risco e Próximo Passo
+O teste de carga (k6) provou que o sistema é estável, mas a latência de pico é de 4.61 segundos.
 
-📄 Licença
-Este projeto está licenciado sob a Licença MIT.
+Risco Atual: O sistema falha no requisito de velocidade pura devido à limitação do Google Apps Script.
 
+Novas implementações futuras mitigarão esse risco, por agora ficamos com essa implementação que está estável
 
 <div align="center"> Feito com 👐🏾 de Carlos Moroni Garcia. </div>

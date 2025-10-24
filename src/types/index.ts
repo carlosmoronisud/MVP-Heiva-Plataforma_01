@@ -12,7 +12,7 @@ export interface IPublicacao {
   id: string;
   titulo: string;
   autores: string; 
-  data: string; 
+  data: number; 
   resumo: string;
   url: string; 
 }
@@ -67,8 +67,8 @@ export interface INoticia {
   id: string;
   titulo: string;
   resumo: string;
-  data: string;
-  linkurl: string;
+  data: number;
+  linkUrl: string;
   imagemurl?: string; 
 }
 

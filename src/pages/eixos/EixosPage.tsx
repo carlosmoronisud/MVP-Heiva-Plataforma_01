@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Seo from '../../components/Seo';
+
 
 // Dados dos eixos do projeto com imagens e links de placeholder
 const eixosData = [
@@ -44,6 +46,10 @@ const eixosData = [
 const EixosPage: React.FC = () => {
   return (
     <div className="bg-gray-100 min-h-screen py-16 px-4">
+      <Seo
+      title="Eixos do Projeto | Hub de Pesquisa Científica"
+      description="Conheça os cinco eixos temáticos do projeto de pesquisa: Curadoria, Extração, Mineração de Argumentos, Visualização e Aspectos Éticos e Legais."
+    />
       <div className="container mx-auto max-w-5xl text-center">
         {/* Título da Página */}
         <motion.h1
@@ -94,7 +100,7 @@ const EixosPage: React.FC = () => {
         ))}
 
         {/* CTA "Resultados" */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.5 }}
@@ -107,7 +113,7 @@ const EixosPage: React.FC = () => {
           >
             Resultados
           </Link>
-        </motion.div>
+        </motion.div> */}
       </div>
     </div>
   );

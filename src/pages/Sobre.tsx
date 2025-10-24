@@ -7,6 +7,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import { loadSingleObjectData } from '../services/dataLoader';
 import { dataUrls } from '../config/dataUrls';
 import type { IConteudoPrincipal } from '../types';
+import Seo from '../components/Seo';
 
 // Componentes Reutilizados
 
@@ -76,6 +77,10 @@ const SobrePage: React.FC = () => {
         >
             {/* NOVO CONTAINER FLEXÍVEL PARA TÍTULO E BOTÃO */}
             <div className="relative flex justify-between items-center mb-12">
+                <Seo
+      title="Sobre o Projeto HEIWA | Hub de Pesquisa Científica"
+      description="Conhecendo o Projeto HEIWA."
+    />
                 <motion.h1
                     className="text-5xl font-extrabold text-left text-gray-800 border-b-4 border-green-500 pb-3 pr-4"
                     initial={{ y: -50, opacity: 0 }}

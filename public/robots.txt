@@ -1,0 +1,11 @@
+# Bloqueio padrão para todos os robôs.
+# No seu caso, queremos liberar TUDO, exceto talvez /data.
+User-agent: *
+Allow: /
+
+# Lista os diretórios de dados que o robô NÃO deve rastrear (se for o caso)
+# Disallow: /data/ 
+
+# IMPORTANTE: Aponte para o seu sitemap
+# Use uma URL de placeholder simples, o Google a ajustará depois
+Sitemap: https://HUB-PESQUISA-PLACEHOLDER.com/sitemap.xml

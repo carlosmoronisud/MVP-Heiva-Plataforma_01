@@ -17,10 +17,10 @@ interface DataUrls {
 
 // URLs das implementações das planilhas Visualizacoes, Noticias, SobreProjeto, Eixos e Publicacoes do Google Apps Script 
 const VISUALIZACOES_FORM_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxIM9Af0uEGJB_f5pjfcKcGRdx-DPGnInTn9Jw9wxG8E1x7VkDU1ZR4zjszfy8HVIlG-Q/exec';
-const PUBLICACOES_FORM_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLnHIm3yDNC87EhyzvQtm6vDIZk4E5HaaQrehc6gZwswCY_i19thxF3rdh75Rju1Pd/exec';
+const PUBLICACOES_FORM_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzFNSByf02weXPlaHM1BVFUUEaPIef_6O-FVs37AoDy-ZPZZlR_4FBnqiLXliJ9cx-j/exec';
 const EIXOS_APPS_SCRIPT_BASE_URL = 'https://script.google.com/macros/s/AKfycbxP8CIPLope6_qT-Ka1p37KGqRGo-iEKXvhPGBxMRRinp4naYiges_-6Y8Qen-Hmi6uxw/exec';
-const SOBRE_PROJETO_APPS_SCRIPT_BASE_URL = 'https://script.google.com/macros/s/AKfycbwSu37mF-TDdiEij6C03E0k5nkCb4mrPF3aZngy4nvJoeSA56PU8SoUYQMAnVxd4olMKQ/exec';
-const NOTICIAS_FORM_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzmPM8Gs8Y6D7wUMgSe18LUOgSwR-370UqGD_me_tpUFdn_hC3vpKRfHMIYXzV8RvaRUw/exec';
+const SOBRE_PROJETO_APPS_SCRIPT_BASE_URL = 'https://script.google.com/macros/s/AKfycbxZmTnFcFqgThBGwDpykGCuldEl7L4ltTdxtmyU9Ibcu1YPaDHF2jq4b3f5PoszZErlAQ/exec';
+const NOTICIAS_FORM_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQedeLvrqAymrOnORWQjAqpONM5350FefGqoGPEkUu6_T6c37kCn4rSj7BEeoUnZ5qWw/exec';
 
 // Exportando as URLs como um objeto do tipo DataUrls
 export const dataUrls: DataUrls = {

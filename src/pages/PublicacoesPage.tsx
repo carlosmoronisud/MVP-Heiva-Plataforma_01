@@ -2,46 +2,49 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+// loadArrayData AGORA ACEITA forceRefresh como segundo parâmetro
 import { loadArrayData } from '../services/dataLoader'; 
 import { dataUrls } from '../config/dataUrls';
 import type { IPublicacao } from '../types';
 import LoadingCircle from '../components/ui/LoadingDots';
-import ReloadButton from '../components/ui/ReloadButton'; // Reutilizando o botão
+import ReloadButton from '../components/ui/ReloadButton'; 
 import CardPublicacao from '../components/cards/CardPublicacao';
+import Seo from '../components/Seo';
+
 
 
 // Define o número de itens a carregar por vez
 const ITEMS_PER_LOAD = 9;
 
 const PublicacoesPage: React.FC = () => {
-    const [allPublicacoes, setAllPublicacoes] = useState<IPublicacao[]>([]); // Array completo (ordenado)
-    const [visiblePublicacoes, setVisiblePublicacoes] = useState<IPublicacao[]>([]); // Array visível
+    // VARIÁVEIS DE ESTADO LOCAIS
+    const [allPublicacoes, setAllPublicacoes] = useState<IPublicacao[]>([]); 
+    const [visiblePublicacoes, setVisiblePublicacoes] = useState<IPublicacao[]>([]); 
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [loadCount, setLoadCount] = useState<number>(1); 
 
-    // Função para carregar os dados
-    const fetchData = useCallback(async () => {
+    // Função para carregar os dados (AGORA ACEITA forceRefresh)
+    const fetchData = useCallback(async (forceRefresh: boolean = false) => { // <-- Aceita o argumento
         setLoading(true);
         setError(null);
         
         try {
-            const publicacoesRaw = await loadArrayData<IPublicacao>(dataUrls.publicacoes);
+            // PASSA O ARGUMENTO para o serviço (ignora o Local Storage se true)
+            const publicacoesRaw = await loadArrayData<IPublicacao>(dataUrls.publicacoes, forceRefresh);
             
-            if (publicacoesRaw) {
-                // 1. ORDENAÇÃO: Garante que as mais recentes fiquem no topo
-                // O formato de data 'DD/MM/AAAA' exige a inversão para ser comparável
+            if (publicacoesRaw && publicacoesRaw.length > 0) {
+                // ORDENAÇÃO: Assumindo que item.data é um TIMESTAMP (number)
                 const publicacoesOrdenadas = publicacoesRaw.sort((a, b) => {
-                    const dateA = new Date(b.data.split('/').reverse().join('-')).getTime();
-                    const dateB = new Date(a.data.split('/').reverse().join('-')).getTime();
-                    return dateA - dateB;
+                    // Ordena do mais novo (maior timestamp) para o mais antigo
+                    return (b.data as number) - (a.data as number); 
                 });
                 
                 setAllPublicacoes(publicacoesOrdenadas);
                 
-                // 2. INICIALIZAÇÃO: Define o array visível com o primeiro lote (9)
+                // INICIALIZAÇÃO
                 setVisiblePublicacoes(publicacoesOrdenadas.slice(0, ITEMS_PER_LOAD));
-                setLoadCount(1); // Reseta o contador
+                setLoadCount(1);
             } else {
                 setAllPublicacoes([]);
                 setVisiblePublicacoes([]);
@@ -54,12 +57,19 @@ const PublicacoesPage: React.FC = () => {
         }
     }, []);
 
-    // Efeito inicial de carregamento
+    // Efeito inicial de carregamento (Chama sem argumentos, usa cache por padrão)
     useEffect(() => {
         fetchData();
     }, [fetchData]);
 
-    // Função para carregar mais 9 publicações
+    // Handler para o Botão (NOVO)
+    const handleReload = () => {
+        // CHAMA O FETCH PASSANDO TRUE (ignora o cache local)
+        fetchData(true); 
+    };
+
+
+    // Função para carregar mais 9 publicações (mantida)
     const handleLoadMore = () => {
         const nextLoadCount = loadCount + 1;
         const startIndex = loadCount * ITEMS_PER_LOAD;
@@ -72,9 +82,7 @@ const PublicacoesPage: React.FC = () => {
 
     const hasMore = visiblePublicacoes.length < allPublicacoes.length;
 
-    // --- Renderização ---
-    
-    // Renderização do Loading inicial
+    // --- Renderização do Loading e Erro (Corrigida para usar handleReload) ---
     if (loading && allPublicacoes.length === 0) {
         return (
             <div className="flex justify-center items-center h-screen">
@@ -88,7 +96,7 @@ const PublicacoesPage: React.FC = () => {
             <div className="container mx-auto px-4 max-w-6xl py-16 text-center">
                 <p className="text-xl text-red-600 font-semibold mb-4">{error}</p>
                 <div className="flex justify-center">
-                    <ReloadButton onClick={fetchData} loading={loading} />
+                    <ReloadButton onClick={handleReload} loading={loading} />
                 </div>
             </div>
         );
@@ -100,7 +108,7 @@ const PublicacoesPage: React.FC = () => {
                 <h2 className="text-4xl font-bold text-gray-800 mb-4">Nossas Publicações</h2>
                 <p className="text-lg text-gray-600">Nenhuma publicação encontrada no momento.</p>
                 <div className="flex justify-end mt-4">
-                    <ReloadButton onClick={fetchData} loading={loading} />
+                    <ReloadButton onClick={handleReload} loading={loading} />
                 </div>
             </div>
         );
@@ -114,6 +122,10 @@ const PublicacoesPage: React.FC = () => {
             transition={{ duration: 0.8 }}
         >
             <div className="relative flex flex-col md:flex-row md:justify-between md:items-center mb-12">
+                <Seo
+                    title="Publicações do Projeto | Hub de Pesquisa Científica"
+                    description="Conheça as publicações do projeto de pesquisa."
+                />
                 <motion.h1
                     className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4 md:mb-0 border-b-4 border-green-500 pb-3"
                     initial={{ y: -50, opacity: 0 }}
@@ -122,25 +134,20 @@ const PublicacoesPage: React.FC = () => {
                 >
                     Nossas Publicações
                 </motion.h1>
+                {/* Botão de recarregar no canto superior direito */}
                 <div className="absolute md:static top-0 right-0 mt-2 md:mt-0">
-                    {/* Botão de recarregar no canto superior direito */}
-                    <ReloadButton onClick={fetchData} loading={loading} />
+                    <ReloadButton onClick={handleReload} loading={loading} />
                 </div>
             </div>
             
-            <p className="text-lg text-gray-600 mb-10 max-w-4xl">
-                Artigos, relatórios e outros materiais de pesquisa que complementam nossas visualizações.
-            </p>
-
-            {/* Grid de Publicações */}
+            {/* Grid de Publicações (mantido) */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {visiblePublicacoes.map((pub, index) => (
-                    // Renderiza o novo componente CardPublicacao
                     <CardPublicacao key={pub.id || index} item={pub} />
                 ))}
             </div>
 
-            {/* Carregar Mais (Load More) */}
+            {/* Carregar Mais (Load More) (mantido) */}
             {hasMore && (
                 <div className="flex justify-center mt-12">
                     <motion.button
@@ -163,7 +170,7 @@ const PublicacoesPage: React.FC = () => {
                 </div>
             )}
             
-            {/* Exibe o indicador de loading enquanto recarrega, mas os dados antigos ficam na tela */}
+            {/* Exibe o indicador de loading enquanto recarrega */}
             {loading && allPublicacoes.length > 0 && (
                 <div className="mt-8 text-center">
                     <LoadingCircle />

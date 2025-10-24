@@ -1,21 +1,22 @@
-// src/components/CardPublicacao.tsx
 
-import React from 'react';
 import { motion } from 'framer-motion';
-import type { IPublicacao } from '../../types';
-
+import type { IPublicacao } from '../../types'; 
 
 interface CardPublicacaoProps {
   item: IPublicacao;
 }
 
 const CardPublicacao: React.FC<CardPublicacaoProps> = ({ item }) => {
-  // Conversão de data para exibição:
-  // Tenta converter o formato DD/MM/AAAA para um formato que new Date() entenda
-  const dataFormatada = item.data 
-    ? new Date(item.data.split('/').reverse().join('-')).toLocaleDateString('pt-BR') 
-    : 'Data não disponível';
-    
+  
+  let dataFormatada = 'Data não disponível';
+  
+  // LÓGICA DE TRATAMENTO OBRIGATÓRIA: Trata o NUMBER (timestamp)
+  if (typeof item.data === 'number' && item.data > 0) {
+    // Cria um objeto Date a partir do timestamp e formata
+    dataFormatada = new Date(item.data).toLocaleDateString('pt-BR');
+  } 
+  // Nota: A lógica de string DD/MM/AAAA foi removida para focar no novo formato
+
   return (
     <motion.div 
       className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden"
