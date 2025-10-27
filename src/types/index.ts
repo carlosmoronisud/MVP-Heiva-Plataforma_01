@@ -69,7 +69,7 @@ export interface INoticia {
   resumo: string;
   data: number;
   linkUrl: string;
-  imagemurl?: string; 
+  imagemUrl?: string; 
 }
 
 // Interface para Conteúdo dos Eixos

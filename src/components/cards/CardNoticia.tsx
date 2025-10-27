@@ -9,7 +9,7 @@ interface CardNoticiaProps {
 }
 
 const CardNoticia: React.FC<CardNoticiaProps> = ({ item }) => {
-  console.log('URL da Imagem:', item.imagemurl);
+  console.log('URL da Imagem:', item.imagemUrl);
   return (
     <motion.a
       href={item.linkUrl}
@@ -25,9 +25,9 @@ const CardNoticia: React.FC<CardNoticiaProps> = ({ item }) => {
     
     <h3 className="text-xl font-bold text-gray-800 mb-2">{item.titulo}</h3>
     
-    {item.imagemurl && (
+    {item.imagemUrl && (
       <img 
-        src={item.imagemurl} 
+        src={item.imagemUrl} 
         alt={item.titulo} 
         className="
           w-full 
